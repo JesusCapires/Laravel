@@ -36,9 +36,15 @@ class CustomerController extends Controller
             $lastName = $customer->last_name;
             $name = $customer->name;
             return response()->json(['error' => false, 'id_last' => $lastId, 'lastName' => $lastName, 'name' => $name]);
-        } else {
-            return response()->json(['error' => true]);
         }
 
+    }
+    public function actualizar($id)
+    {
+            $customer = Customer::findOrFail($id);
+
+            return view('welcomen')->with([
+                'customer' => $customer
+            ]);
     }
 }

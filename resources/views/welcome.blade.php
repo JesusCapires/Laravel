@@ -13,8 +13,12 @@
         </style>
     </head>
     <body>
-        <h1>Hola Mundo, Registro de clientes</h1>
-
+        <h1>Registro de clientes</h1>
+          <!-- Botón que activa el modal -->
+          <a href=""></a>
+          <button type="button" class="btn btn-primary ms-5 mt-5 mb-5" data-bs-toggle="modal" data-bs-target="#miModal" onclick="addContent()">
+          Crear cliente
+          </button>
         <table id="tableCustomers">
             <thead>
                 <tr>
@@ -32,7 +36,7 @@
                         <td> {{$cliente->email}}</td>
                         <td>
                             {{-- onclick="actualizarRegistro(${cliente->id})" --}}
-                            <button class="btn btn-primary btn-sm" onclick="createOrUpdate({{$cliente->id}})">
+                            <button class="btn btn-primary btn-sm" onclick="addContent({{$cliente->id}})">
                                 {{-- {{$cliente->id}} --}}
                                 Actualizar
                             </button>
@@ -42,11 +46,7 @@
             </tbody>
         </table>
 
-        <!-- Botón que activa el modal -->
-        <a href=""></a>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModal" onclick="addContent()">
-        Abrir modal XL
-        </button>
+
 
         <!-- El modal -->
         <div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
@@ -73,9 +73,13 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script>
 
+
+
         const createOrUpdate = (id) => {
             console.log(id);
         }
+
+
 
         const contenidoAgregado =
         `<form action="#" id="formCustomersEC">
@@ -165,7 +169,24 @@
             </form>`;
 
 
-        const addContent = () => { $('#contenido-dinamico').removeClass('contenido-inicial').addClass('contenido-agregado').html(contenidoAgregado); };
+        const addContent = (id) => {
+            console.log(id);
+            $('#contenido-dinamico').removeClass('contenido-inicial').addClass('contenido-agregado').html(contenidoAgregado);
+            if(id != 0){
+                seeCustomer(id).then(respuesta => {
+                    const data = JSON.parse(response);
+                    $('#formCustomersEC').fromJSON(data);
+                });
+            }
+        };
+
+        const seeCustomer = async(id) => {
+            let response = await $.ajax({
+            url: "/actualizaClientes",
+            type: 'GET',
+            data: {id}
+            });
+        }
 
         const idiomaSpanish = {
                     "search":"Buscar:",
@@ -267,8 +288,6 @@
                     });
                 }
             });
-
-
         }
     </script>
 </html>
