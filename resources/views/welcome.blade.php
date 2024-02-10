@@ -38,7 +38,7 @@
                             {{-- onclick="actualizarRegistro(${cliente->id})" --}}
                             <button class="btn btn-primary btn-sm" onclick="addContent({{$cliente->id}})">
                                 {{-- {{$cliente->id}} --}}
-                                Actualizar
+                                ActualizarCambio
                             </button>
                         </td>
                     </tr>
