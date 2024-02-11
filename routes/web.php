@@ -18,4 +18,4 @@ Route::get('/', [CustomerController::class, 'index']);
 
 
 Route::post('/clientes', [CustomerController::class, 'crear'])->name('creaClientes');
-Route::post('/actClientes/{id}', [CustomerController::class, 'actualizar'])->name('actualizaClientes');
+Route::get('/editClientes', [CustomerController::class, 'editar'])->name('editaClientes');

@@ -18,18 +18,22 @@ class CustomerController extends Controller
 
     public function crear(Request $request)
     {
+        $id = $request->input('id');
         // dd($request); // MAPEO
-            $customer = Customer::create([
-            'name' => $request->input('nombre'),
-            'last_name' => $request->input('apellido'),
-            'email' => $request->input('email'),
-            'phone' => $request->input('telefono'),
-            'direction' => $request->input('direccion'),
-            'city' => $request->input('ciudad'),
-            'country' => $request->input('pais'),
-            'zip_code' => $request->input('cp'),
-            'date_register' => $request->input('fecha_registro'),
-        ]);
+        $customer = Customer::updateOrCreate(
+            ['id' => $id],
+            [
+                'name' => $request->input('nombre'),
+                'last_name' => $request->input('apellido'),
+                'email' => $request->input('email'),
+                'phone' => $request->input('telefono'),
+                'direction' => $request->input('direccion'),
+                'city' => $request->input('ciudad'),
+                'country' => $request->input('pais'),
+                'zip_code' => $request->input('cp'),
+                'date_register' => $request->input('fecha_registro'),
+            ]
+        );
 
         if ($customer) {
             $lastId = $customer->id;
@@ -39,12 +43,11 @@ class CustomerController extends Controller
         }
 
     }
-    public function actualizar($id)
-    {
-            $customer = Customer::findOrFail($id);
 
-            return view('welcomen')->with([
-                'customer' => $customer
-            ]);
+    public function editar(Request $request)
+    {
+        $id = $request->input('id');
+        $customer = Customer::find($id);
+        return response()->json($customer);
     }
 }

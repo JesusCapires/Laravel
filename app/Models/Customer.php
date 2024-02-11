@@ -17,7 +17,7 @@ class Customer extends Model
         'city',
         'country',
         'zip_code',
-        'registration_date',
+        'date_register',
     ];
 }
 

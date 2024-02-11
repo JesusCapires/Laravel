@@ -1,51 +1,4 @@
-
-
-@extends('layout')
-
-@section('contenido')
-    <div id="ruta-crea-clientes" data-route="{{ route('editaClientes') }}"></div>
-    <div id="ruta-crea-clientes2" data-route="{{ route('creaClientes') }}"></div>
-    <h1>Registro de clientes</h1>
-    <button type="button" class="btn btn-primary ms-5 mt-5 mb-5" data-bs-toggle="modal" data-bs-target="#miModal" onclick="addContent()">
-        Crear cliente
-    </button>
-    <table id="tableCustomers">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Email</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="registerCustomers">
-            @foreach ($clientes as $cliente)
-                <tr>
-                    <td id="name{{$cliente->id}}"> {{$cliente->name}} </td>
-                    <td id="last_name{{$cliente->id}}"> {{$cliente->last_name}}</td>
-                    <td id="email{{$cliente->id}}"> {{$cliente->email}}</td>
-                    <td id="">
-                        {{-- onclick="actualizarRegistro(${cliente->id})" --}}
-                        <button class="btn btn-primary btn-sm" onclick="addContent({{$cliente->id}})">
-                            {{-- {{$cliente->id}} --}}
-                            Actualizar
-                        </button>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-@endsection
-
-@section('librerias')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script>
-        const createOrUpdate = (id) => {
+const createOrUpdate = (id) => {
     console.log(id);
 }
 
@@ -262,27 +215,3 @@ const validateForm = () => {
         }
     });
 }
-
-    </script>
-
-
-    <script>
-        const idiomaSpanish = {
-            "search":"Buscar:",
-            "emptyTable":"No hay información",
-            "info":"Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-            "infoEmpty":"Mostrando 0 a 0 de 0 Entradas",
-            "infoFiltered":"(Filtrado de _MAX_ total entradas)",
-            "lengthMenu":"Mostrar _MENU_ Entradas",
-            "loadingRecords":"Cargando...",
-            "procesing":"Procesando...",
-            "zeroRecords":"Sin resultados encontrados",
-            "paginate":{
-                "first":"Primero",
-                "last":"Siguiente",
-                "next":"Siguiente",
-                "previous":"Anterior"
-            }
-        }
-    </script>
-@endsection
